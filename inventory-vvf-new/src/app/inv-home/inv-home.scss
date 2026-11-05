@@ -1,0 +1,22 @@
+.navbar {
+    height: 64px;
+    background: #64000d;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.brand{
+    display: flex;
+    align-items: center;
+    gap:10px;
+
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.brand mat-icon {
+    color: #ffcc00
+}
