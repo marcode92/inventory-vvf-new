@@ -1,5 +1,15 @@
-<app-inv-home></app-inv-home>
+<mat-toolbar class="navbar">
+  <div class="brand">
+    <mat-icon>local_fire_department</mat-icon>
+    <span>Inventory VVF</span>
+  </div>
+  <div class="position">
+  <button class="nav-button" routerLink="/model"> <mat-icon>inventory_2</mat-icon> Agg. articolo</button>
+  <button class="nav-button"> <mat-icon>inventory_2</mat-icon> Crea modello</button>
+  <button class="nav-button"> <mat-icon>inventory_2</mat-icon> Gest. intervento</button>
+  </div>
+</mat-toolbar>
 
-<main class="page-container">
+<div class="page-container">
   <router-outlet></router-outlet>
-</main>
+</div>
