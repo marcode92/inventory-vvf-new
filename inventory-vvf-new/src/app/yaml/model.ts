@@ -14,6 +14,11 @@ export interface Fields {
   tipo_campo?:string,
   value?:string | number | boolean,
 }
+export enum TipoCampo {
+  NUME = 'Numerico',
+  TESTO = 'Testo',
+  BOOL = 'Decisionale',
+}
 
 export enum Stato {
   DA_INVENTARIARE = 'Da inventariare',

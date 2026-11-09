@@ -1,65 +1,73 @@
-<div>
-    <mat-icon>
-        laptop
+<div class="row-position">
+    <mat-icon fontSet="material-symbols-outlined" class="layers-icon">
+        deployed_code
     </mat-icon>
-    <div>Aggiungi ad inventario </div>
+    <h2>Crea nuovo modello </h2>
 </div>
-    <form [formGroup]="assetModule" class="form-container">
+<form [formGroup]="assetModule" class="form-container" >
 
-        <div class="row-position">
-            <div class="info-box">
-                <mat-icon>privacy_tip</mat-icon>
-                <div class="mod-sel">
-                    <mat-label>Modello Selezionato</mat-label>
-                    <input matInput [value]="nomeModello" type="text" readonly />
-                </div>
+    <div class="col-position">
+                <h4>Nome Modello</h4> <mat-form-field>
+                    <input matInput type="text" formControlName="model_name" />
+                </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <h3>CUSTOM FIELDS</h3>
+    <div formArrayName="tecn" class="fields-grid">
+        <div *ngFor="let field of tecnCtrl.controls; let i = index" [formGroupName]="i" class="field-row">
+            <mat-form-field appearance="outline">
+                <mat-label>Nome Campo</mat-label>
+                <input matInput type="text" formControlName="nome_campo" />
+                <mat-error *ngIf="field.get('nome_campo')?.hasError('required')">
+                    Campo obbligatorio
+                </mat-error>
+            </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo Campo</mat-label>
+                <mat-select formControlName="tipo_campo">
+                    <mat-option *ngFor="let tipo of tipi" [value]="tipo">
+                        {{ tipo }}
+                    </mat-option>
+                </mat-select>
+                 <mat-error *ngIf="field.get('tipo_campo')?.hasError('required')">
+                        Campo obbligatorio
+                    </mat-error>
+            </mat-form-field>
+              <div *ngIf="field.get('tipo_campo')?.value === TipoCampo.NUME">
+                <mat-form-field appearance="outline">
+                    <mat-label>Valore</mat-label>
+                    <input matInput type="number" formControlName="value" />
+                    <mat-error *ngIf="field.get('value')?.hasError('required')">
+                        Campo obbligatorio
+                    </mat-error>
+                </mat-form-field>
             </div>
-            <div class="info-box">
-                <mat-icon class="layers-icon">layers</mat-icon>
-                    <mat-label>Asset Inventariati</mat-label>
-                    <input matInput type="text" [value]="qty" />
+            <div *ngIf="field.get('tipo_campo')?.value === TipoCampo.TESTO">
+                <mat-form-field appearance="outline">
+                    <mat-label>Valore</mat-label>
+                    <input matInput type="text" formControlName="value" />
+                    <mat-error *ngIf="field.get('value')?.hasError('required')">
+                        Campo obbligatorio
+                    </mat-error>
+                </mat-form-field>
             </div>
+            <div *ngIf="field.get('tipo_campo')?.value === TipoCampo.BOOL" class="switch-container">
+                <label>NO/YES</label>
+                <mat-slide-toggle formControlName="value"></mat-slide-toggle>
+            </div>
+
+                <button mat-icon-button (click)="removeRow(i)" >
+                    <mat-icon> delete </mat-icon>
+                </button>
+                <ng-container *ngIf="i == tecnCtrl.length - 1">
+                    <button mat-icon-button (click)="addRow()">
+                        <mat-icon> add </mat-icon>
+                    </button>
+                </ng-container>
         </div>
-
-        <section class="section-box">
-            <div class="section-header">
-                <h3>
-                    Dati inventario
-                </h3>
-                <div class="section-content">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Numero inventario</mat-label>
-                        <input matInput type="text" formControlName="num_inv" />
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label>seriale</mat-label>
-                        <input matInput type="text" formControlName="seriale" />
-                    </mat-form-field>
-                </div>
-            </div>
-        </section>
-        <section class="section-box">
-            <div class="section-header">
-                <h3>
-                    Caratteristiche tecniche
-                </h3>
-
-                <div formArrayName="tecn" class="fields-grid section-content">
-                    <div *ngFor="let field of tecnCtrl.controls; let i = index" class="field-row">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Nome Campo</mat-label>
-                            <input matInput type="text" [formControlName]="i" />
-                            <!-- <mat-error *ngIf="field.get('i')?.hasError('required')">
-                                Campo obbligatorio
-                            </mat-error> -->
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </form>
-
-<!-- <mat-dialog-actions align="end" class="dialog-actions">
-    <button mat-button mat-dialog-close>Annulla</button>
-    <button mat-raised-button color="primary">Salva</button>
-</mat-dialog-actions> -->
+    </div>
+    <div align="end" class="position-footer" >
+        <button mat-button mat-dialog-close>Annulla</button>
+        <button mat-raised-button color="primary">Salva</button>
+    </div>
+</form>

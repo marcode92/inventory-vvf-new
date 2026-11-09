@@ -15,6 +15,11 @@ export const routes: Routes = [
         path:'model',
         loadComponent:() =>
             import('./inv-model/inv-model').then(x => x.InvModel)
+    },
+    {
+        path:'articolo',
+        loadComponent:() =>
+            import('./inv-articolo/inv-articolo').then(x => x.InvArticolo)
     }
 
 ];
