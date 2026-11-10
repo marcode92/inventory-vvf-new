@@ -1,1 +1,50 @@
-<div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div><div>aa</div>
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="inventory-table">
+        <ng-container matColumnDef="num_inventario">
+            <th mat-header-cell *matHeaderCellDef>
+                Numero inventario
+            </th>
+            <td mat-cell *matCellDef="let articolo; let i = index">
+                <div *ngIf="checkStato(i); else alternative"> {{ articolo.num_inventario }} </div>
+                <ng-template #alternative>
+                    <div> {{ getEnumValue(articolo.stato) }}
+                    </div>
+                </ng-template>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="seriale">
+            <th mat-header-cell *matHeaderCellDef>
+                seriale
+            </th>
+            <td mat-cell *matCellDef="let articolo"> {{ articolo.seriale }}</td>
+        </ng-container>
+        <ng-container matColumnDef="possessore">
+            <th mat-header-cell *matHeaderCellDef>
+                Possessore
+            </th>
+            <td mat-cell *matCellDef="let articolo"> {{ articolo.possessore }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dettagli">
+            <th mat-header-cell *matHeaderCellDef>
+                dettagli
+            </th>
+            <td mat-cell *matCellDef="let articolo">
+                <button mat-icon-button type="button" (click)="showDetails(articolo)">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="last_move">
+            <th mat-header-cell *matHeaderCellDef>
+                Data ultimo movimento
+            </th>
+
+            <td mat-cell *matCellDef="let articolo">
+                {{ articolo.last_move | date:'dd/MM/yyyy' }}
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+    </table>
+</div>

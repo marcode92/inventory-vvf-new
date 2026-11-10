@@ -1,0 +1,25 @@
+
+.row-position {
+  display: flex;
+  flex-direction: row;
+  gap:16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top:12px
+}
+
+.col-position {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    gap:16px;
+  padding: 16px;
+  border: 1px solid #d5dce8;
+  border-radius: 12px;
+  background: #f5f7fa;
+  margin-bottom:24px;
+}

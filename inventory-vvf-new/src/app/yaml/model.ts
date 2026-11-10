@@ -2,11 +2,15 @@ export interface Model {
   id_modello:string,
   nome_modello:string,
   quantita: Number,
+}
+
+export interface Article {
+  idModello:string,
   caratteristiche: Fields,
-  stato: Stato,
+  stato: 'DA_INVENTARIARE' | 'FUORI_USO' | 'MAGAZZINO',
   creation_date:  Date,
   categoria:string,
-  sottocategoria:string,
+  sottocategoria:string
 }
 
 export interface Fields {
@@ -22,5 +26,6 @@ export enum TipoCampo {
 
 export enum Stato {
   DA_INVENTARIARE = 'Da inventariare',
-  COMPLETO = 'Completo'
+  MAGAZZINO = 'Magazzino',
+  FUORI_USO = 'Fuori uso'
 }
