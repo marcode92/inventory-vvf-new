@@ -1,41 +1,47 @@
-<div mat-dialog-title class="dialog-title row-position">
-    <mat-icon>
-        laptop
-    </mat-icon>
-    <div>Seleziona Categoria </div>
-</div>
-<mat-dialog-content appearance="outline">
-    <form [formGroup]="categoryCtrl" class="form-container">
+<div *ngIf="!showaddcategory; else addcategory">
+    <div mat-dialog-title class="dialog-title row-position">
+        <mat-icon>
+            laptop
+        </mat-icon>
+        <div>Seleziona Categoria </div>
+    </div>
+    <mat-dialog-content appearance="outline">
+        <form [formGroup]="categoryCtrl" class="form-container">
 
-        <div class="row-position">
-            <div class="info-box">
-                <mat-icon>privacy_tip</mat-icon>
-                <div class="mod-sel">
-                    <mat-label>Categoria</mat-label>
-                    <mat-form-field appearance="outline" class="margin">
-                        <mat-select formControlName="nomeCat">
-                            <mat-option *ngFor="let cat of listCatName" [value]="cat">
-                                {{ cat }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+            <div class="row-position">
+                <div class="info-box">
+                    <mat-icon>privacy_tip</mat-icon>
                     <div class="mod-sel">
-                    <mat-label>SottoCategoria</mat-label>
-                    <mat-form-field appearance="outline" class="margin">
-                        <mat-select formControlName="nomsottoCat">
-                            <mat-option *ngFor="let cat of listsottoCatName" [value]="cat">
-                                {{ cat }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                        <mat-label>Categoria</mat-label>
+                        <mat-form-field appearance="outline" class="margin">
+                            <mat-select formControlName="nomeCat">
+                                <mat-option *ngFor="let cat of listCatName | keyvalue" [value]="cat.key">
+                                    {{ cat.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="mod-sel">
+                        <mat-label>SottoCategoria</mat-label>
+                        <mat-form-field appearance="outline" class="margin">
+                            <mat-select formControlName="nomesottoCat">
+                                <mat-option *ngFor="let cat of listsottoCatName | keyvalue" [value]="cat.key"> {{ cat.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-</mat-dialog-content>
+    </mat-dialog-content>
+</div>
+<ng-template #addcategory>
+    <app-inv-add-categ (categoryToAdd)="saveNewCategory($event)"></app-inv-add-categ>
+</ng-template>
 <mat-dialog-actions align="end" class="dialog-actions">
     <button mat-button mat-dialog-close>Annulla</button>
-    <button mat-raised-button color="primary" (click)="save()">Salva</button>
+    <button *ngIf="showaddcategory" mat-raised-button color="primary" (click)="getNewCategory()">Salva</button>
+    <button *ngIf="!showaddcategory" mat-raised-button color="primary" (click)="add()">Aggiungi categoria</button>
+    <button *ngIf="!showaddcategory" mat-raised-button color="primary" (click)="save()">Procedi</button>
 </mat-dialog-actions>

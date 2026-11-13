@@ -8,7 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { Article } from '../yaml/model';
+import { Article } from '../yaml/inventory-yaml';
 
 @Component({
   selector: 'app-inv-assegnazione',

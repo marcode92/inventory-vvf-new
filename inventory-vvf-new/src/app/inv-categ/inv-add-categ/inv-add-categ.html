@@ -1,0 +1,49 @@
+<div mat-dialog-title class="dialog-title row-position">
+    <mat-icon>
+        laptop
+    </mat-icon>
+    <div>Aggiungi categoria e sottocategoria </div>
+</div>
+<mat-dialog-content appearance="outline">
+    <form [formGroup]="addCategoryCtrl" class="form-container">
+
+        <div class="row-position">
+            <div class="info-box">
+                <mat-icon>privacy_tip</mat-icon>
+                
+                    <h4>Categoria</h4>
+                    <div class="mod-sel">
+                    <mat-form-field appearance="outline">
+                    <input matInput type="text" formControlName="sottocategoria" />
+                </mat-form-field>
+                <div class="mod-sel">
+                   
+                </div>
+                    <div class="mod-sel">
+                         <h4>Sottocategoria</h4>
+                    <mat-form-field appearance="outline">
+                        <mat-chip-grid #chipGrid >
+                            @for (cat of sottocategoria; track cat){
+                                <mat-chip-row (removed)="rimuovi(cat)" class="chips-vvf">{{ cat }}
+                                    <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                                </mat-chip-row>
+                            }
+                        </mat-chip-grid>
+                        <input [matChipInputFor]="chipGrid"
+                        [matChipInputSeparatorKeyCodes]="separatorKeys"
+                        (matChipInputTokenEnd)="aggiungi($event)">
+                    <!-- <input matInput type="text" formControlName="categoria" /> -->
+                    <!-- <mat-error *ngIf="field.get('value')?.hasError('required')">
+                        Campo obbligatorio
+                    </mat-error> -->
+                </mat-form-field>
+                   <!--  <mat-error *ngIf="field.get('value')?.hasError('required')">
+                        Campo obbligatorio
+                    </mat-error> -->
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>

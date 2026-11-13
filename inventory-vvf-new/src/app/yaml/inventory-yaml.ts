@@ -4,6 +4,16 @@ export interface Model {
   quantita: Number,
 }
 
+export interface Categoria {
+ id?:string,
+ nome_categoria: string
+}
+
+export interface Sottocategoria {
+  id?:string,
+ nome_sottocategoria: string
+}
+
 export interface Article {
   idModello:string,
   caratteristiche: Fields,

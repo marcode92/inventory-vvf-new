@@ -1,0 +1,32 @@
+
+.row-position {
+  display: flex;
+  flex-direction: row;
+  gap:16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top:12px
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    gap:8px;
+  padding: 8px;
+  border: 1px solid #d5dce8;
+  border-radius: 12px;
+  background: #f5f7fa;
+}
+
+.chips-vvf {
+    height: 24px;
+    min-height: 24px;
+    border-radius: 16px;
+    --mdc-chip-label-text-size: 11px;
+    --mdc-chip-container-height: 24px;
+}
+
+.mat-mdc-standard-chip.chips-vvf {
+  --mdc-chip-container-height: 12px !important;
+    background-color:blue !important;
+}
