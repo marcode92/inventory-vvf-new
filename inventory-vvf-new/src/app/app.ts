@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
-import { InvModel } from './inv-model/inv-model';
+import { InvModel } from './inv-categ/inv-model/inv-model';
 import { InvCateg } from './inv-categ/inv-categ';
 
 @Component({

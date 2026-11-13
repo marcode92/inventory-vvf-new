@@ -1,0 +1,58 @@
+.info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #d5dce8;
+    border-radius: 12px;
+    background: #f5f7fa;
+    margin-bottom: 12px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+}
+
+.col-position {
+    display: flex;
+    flex-direction: column;
+}
+
+.big-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+}
+
+.big-button {
+    width: 64px;
+    height: 64px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-card.info-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #d5dce8;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.table-box{
+    width: 100%;
+    flex:1;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #d5dce8;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}

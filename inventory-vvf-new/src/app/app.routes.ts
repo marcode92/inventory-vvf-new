@@ -14,7 +14,7 @@ export const routes: Routes = [
     {
         path:'model',
         loadComponent:() =>
-            import('./inv-model/inv-model').then(x => x.InvModel)
+            import('./inv-categ/inv-model/inv-model').then(x => x.InvModel)
     },
     {
         path:'arrivi',
@@ -25,6 +25,11 @@ export const routes: Routes = [
         path:'articolo',
         loadComponent:() =>
             import('./inv-articolo/inv-articolo').then(x => x.InvArticolo)
+    },
+    {
+        path:'assegnazione',
+        loadComponent:() =>
+            import('./inv-assegnazione/inv-assegnazione').then(x => x.InvAssegnazione)
     }
 
 ];
