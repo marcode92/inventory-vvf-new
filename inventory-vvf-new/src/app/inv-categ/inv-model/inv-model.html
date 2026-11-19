@@ -7,8 +7,17 @@
 <form [formGroup]="assetModule" class="form-container" >
 
     <div class="col-position">
-                <h4>Nome Modello</h4> <mat-form-field>
+                <h4>Nome Modello</h4> 
+                <mat-form-field>
                     <input matInput type="text" formControlName="model_name" />
+                </mat-form-field>
+                <h4>Categoria</h4> 
+                <mat-form-field>
+                    <input matInput type="text" formControlName="categoria"/>
+                </mat-form-field>
+                <h4>Sottocategoria</h4> 
+                <mat-form-field>
+                    <input matInput type="text" formControlName="sottocategoria"/>
                 </mat-form-field>
     </div>
     <mat-divider></mat-divider>

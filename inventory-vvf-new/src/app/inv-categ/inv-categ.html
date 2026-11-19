@@ -14,18 +14,24 @@
                     <div class="mod-sel">
                         <mat-label>Categoria</mat-label>
                         <mat-form-field appearance="outline" class="margin">
-                            <mat-select formControlName="nomeCat">
-                                <mat-option *ngFor="let cat of listCatName | keyvalue" [value]="cat.key">
+                            <mat-select formControlName="categoria">
+                                <mat-option *ngFor="let cat of listCatName | keyvalue" 
+                                [value]="cat.key">
                                     {{ cat.value }}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="categoryCtrl.get('categoria')?.hasError('required')">
+                        Campo obbligatorio
+                    </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mod-sel">
                         <mat-label>SottoCategoria</mat-label>
                         <mat-form-field appearance="outline" class="margin">
-                            <mat-select formControlName="nomesottoCat">
-                                <mat-option *ngFor="let cat of listsottoCatName | keyvalue" [value]="cat.key"> {{ cat.value }}
+                            <mat-select formControlName="sottocategoria">
+                                <mat-option *ngFor="let s_cat of listsottoCatName | keyvalue" 
+                                    [value]="s_cat.key"> 
+                                    {{ s_cat.value }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -37,11 +43,11 @@
     </mat-dialog-content>
 </div>
 <ng-template #addcategory>
-    <app-inv-add-categ (categoryToAdd)="saveNewCategory($event)"></app-inv-add-categ>
+    <app-inv-add-categ (categoryToAdd)="saveNewCategory($event)" ></app-inv-add-categ>
 </ng-template>
 <mat-dialog-actions align="end" class="dialog-actions">
     <button mat-button mat-dialog-close>Annulla</button>
     <button *ngIf="showaddcategory" mat-raised-button color="primary" (click)="getNewCategory()">Salva</button>
-    <button *ngIf="!showaddcategory" mat-raised-button color="primary" (click)="add()">Aggiungi categoria</button>
-    <button *ngIf="!showaddcategory" mat-raised-button color="primary" (click)="save()">Procedi</button>
+    <button *ngIf="!showaddcategory" mat-raised-button color="primary" (click)="add()" disabled="true">Aggiungi categoria</button>
+    <button *ngIf="!showaddcategory" mat-raised-button color="primary" (click)="createModel()">Procedi</button>
 </mat-dialog-actions>

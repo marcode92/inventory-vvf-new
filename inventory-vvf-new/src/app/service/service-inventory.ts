@@ -31,7 +31,14 @@ getCategoryList(): Observable<Categoria[]>{
     return this.http.get<Categoria[]>(`${this.baseUrl}/categoria`)
 }
 getSottoCategoryList(id?:string): Observable<Sottocategoria[]>{
+  console.log(id)
     return this.http.get<Sottocategoria[]>(`${this.baseUrl}/sottocategoria/${id}`)
+}
+getCategory(id?:string): Observable<Categoria>{
+    return this.http.get<Categoria>(`${this.baseUrl}/categoria/${id}`)
+}
+getSottoCategory(id_categoria?:string,id_sottocategoria?:string): Observable<Sottocategoria>{
+    return this.http.get<Sottocategoria>(`${this.baseUrl}/sottocategoria/${id_categoria}/${id_sottocategoria}`)
 }
 createCategoryList(body: Categoria): Observable<Categoria>{
     return this.http.post<Categoria>(`${this.baseUrl}/categoria`,body)

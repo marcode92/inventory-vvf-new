@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Fields, TipoCampo } from '../../yaml/inventory-yaml';
+import { Categoria, Fields, Sottocategoria, TipoCampo } from '../../yaml/inventory-yaml';
 import { ServiceInventory } from '../../service/service-inventory';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -21,16 +21,22 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
   styleUrl: './inv-model.scss',
 })
 export class InvModel {
+  @Input() categoriaselez?:string;
+
   error: string | null = null;  
+  tipi: TipoCampo[] = Object.values(TipoCampo);
+  nomeModello='fujitsu 33px gt52o'
+
+  readonly TipoCampo = TipoCampo;
   
   get tecnCtrl(): FormArray<FormGroup> {
     return this.assetModule.controls.tecn;
   }
- readonly TipoCampo = TipoCampo;
-  tipi: TipoCampo[] = Object.values(TipoCampo);
-nomeModello='fujitsu 33px gt52o'
+  
 assetModule = new FormGroup({
   model_name: new FormControl('model_name'),
+  categoria: new FormControl(''),
+  sottocategoria: new FormControl({value:'',disabled:true}),
   tecn:  new FormArray<FormGroup>([])
 })
 
@@ -39,11 +45,21 @@ assetModule = new FormGroup({
    
 
   ngOnInit(){
-    const backEnd = ["1","2","3"]
-
-    backEnd.forEach(element => {
-      this.tecnCtrl.push(this.createField(''))
+    const data = history.state;
+    this.serviceInventory.getCategory(data.categoria).subscribe(c => {
+      console.log(data)
+      this.assetModule.patchValue({
+      categoria: c.nome_categoria,
     });
+    })
+
+    if(data.sottocategoria){
+      this.serviceInventory.getSottoCategory(data.categoria,data.sottocategoria).subscribe(s =>{
+         this.assetModule.patchValue({
+      sottocategoria: s.nome_sottocategoria,
+    });
+      })
+    }
   }
 
     createField(nomeCampo?: string, tipoCampo?: string | undefined, value?: string | boolean | number): FormGroup {

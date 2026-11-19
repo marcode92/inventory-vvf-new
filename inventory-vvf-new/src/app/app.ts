@@ -41,7 +41,7 @@ export class App {
       }
     );
     dialogRef.afterClosed().subscribe(data => {
-      this.router.navigate(['/model']);
+      this.router.navigate(['/model'], { state:data });
       
       /* this.dataSource.data = data; */
     })
