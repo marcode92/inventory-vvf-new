@@ -1,7 +1,9 @@
 export interface Model {
-  id_modello:string,
-  nome_modello:string,
-  quantita: Number,
+  id_modello?:string,
+  nome_modello?:string,
+  id_categoria?:string,
+  id_sottocategoria?:string,
+  campi?:Fields[],
 }
 
 export interface Categoria {

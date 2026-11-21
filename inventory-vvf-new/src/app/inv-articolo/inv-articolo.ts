@@ -20,12 +20,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 export class InvArticolo {
      
   get tecnCtrl(): FormArray<FormControl> {
-  return this.assetModule.controls.tecn;
+  return this.assetModel.controls.tecn;
 }
 
 nomeModello='fujitsu 33px gt52o'
 qty='30'
-assetModule = new FormGroup({
+assetModel = new FormGroup({
   mod_sel: new FormControl('prova model'),
   asset_reg: new FormControl(''),
   num_inv: new FormControl(''),

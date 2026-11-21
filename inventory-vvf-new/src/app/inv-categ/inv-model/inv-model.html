@@ -1,24 +1,41 @@
-<div class="row-position">
-    <mat-icon fontSet="material-symbols-outlined" class="layers-icon">
-        deployed_code
-    </mat-icon>
-    <h2>Crea nuovo modello </h2>
-</div>
-<form [formGroup]="assetModule" class="form-container" >
+<form [formGroup]="assetModel" class="form-container">
+    <div class="row-position">
+        <mat-icon fontSet="material-symbols-outlined" class="layers-icon">
+            deployed_code
+        </mat-icon>
+        <h2>Crea nuovo modello </h2>
+    </div>
 
-    <div class="col-position">
-                <h4>Nome Modello</h4> 
+    <div class="col-position info-container">
+        <h4>Nome Modello</h4>
+        <mat-form-field>
+            <input matInput type="text" formControlName="nome_modello" />
+            <mat-error *ngIf="assetModel.get('nome_modello')?.hasError('required') && 
+        !assetModel.get('nome_modello')?.hasError('alreadyExists')">
+                Campo obbligatorio
+            </mat-error>
+            <mat-error
+                *ngIf="assetModel.get('nome_modello')?.hasError('alreadyExists') && 
+                !assetModel.get('nome_modello')?.hasError('required')">
+                Nome già esistente
+            </mat-error>
+        </mat-form-field>
+        <div class="row-position">
+            <div class="col-position">
+                <h4>Categoria</h4>
                 <mat-form-field>
-                    <input matInput type="text" formControlName="model_name" />
+                    <input matInput type="text" formControlName="categoria" readonly tabindex="-1"
+                        style="pointer-events: none;" />
                 </mat-form-field>
-                <h4>Categoria</h4> 
+            </div>
+            <div class="col-position">
+                <h4>Sottocategoria</h4>
                 <mat-form-field>
-                    <input matInput type="text" formControlName="categoria"/>
+                    <input matInput type="text" formControlName="sottocategoria" readonly tabindex="-1"
+                        style="pointer-events: none;" />
                 </mat-form-field>
-                <h4>Sottocategoria</h4> 
-                <mat-form-field>
-                    <input matInput type="text" formControlName="sottocategoria"/>
-                </mat-form-field>
+            </div>
+        </div>
     </div>
     <mat-divider></mat-divider>
     <h3>CUSTOM FIELDS</h3>
@@ -31,52 +48,29 @@
                     Campo obbligatorio
                 </mat-error>
             </mat-form-field>
-              <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Tipo Campo</mat-label>
                 <mat-select formControlName="tipo_campo">
                     <mat-option *ngFor="let tipo of tipi" [value]="tipo">
                         {{ tipo }}
                     </mat-option>
                 </mat-select>
-                 <mat-error *ngIf="field.get('tipo_campo')?.hasError('required')">
-                        Campo obbligatorio
-                    </mat-error>
+                <mat-error *ngIf="field.get('tipo_campo')?.hasError('required')">
+                    Campo obbligatorio
+                </mat-error>
             </mat-form-field>
-              <div *ngIf="field.get('tipo_campo')?.value === TipoCampo.NUME">
-                <mat-form-field appearance="outline">
-                    <mat-label>Valore</mat-label>
-                    <input matInput type="number" formControlName="value" />
-                    <mat-error *ngIf="field.get('value')?.hasError('required')">
-                        Campo obbligatorio
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div *ngIf="field.get('tipo_campo')?.value === TipoCampo.TESTO">
-                <mat-form-field appearance="outline">
-                    <mat-label>Valore</mat-label>
-                    <input matInput type="text" formControlName="value" />
-                    <mat-error *ngIf="field.get('value')?.hasError('required')">
-                        Campo obbligatorio
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div *ngIf="field.get('tipo_campo')?.value === TipoCampo.BOOL" class="switch-container">
-                <label>NO/YES</label>
-                <mat-slide-toggle formControlName="value"></mat-slide-toggle>
-            </div>
-
-                <button mat-icon-button (click)="removeRow(i)" >
-                    <mat-icon> delete </mat-icon>
+            <button mat-icon-button (click)="removeRow(i)">
+                <mat-icon> delete </mat-icon>
+            </button>
+            <ng-container *ngIf="i == 0">
+                <button mat-icon-button (click)="addRow()">
+                    <mat-icon> add </mat-icon>
                 </button>
-                <ng-container *ngIf="i == tecnCtrl.length - 1">
-                    <button mat-icon-button (click)="addRow()">
-                        <mat-icon> add </mat-icon>
-                    </button>
-                </ng-container>
+            </ng-container>
         </div>
     </div>
-    <div align="end" class="position-footer" >
+    <div align="end" class="position-footer">
         <button mat-button mat-dialog-close>Annulla</button>
-        <button mat-raised-button color="primary">Salva</button>
+        <button mat-raised-button color="primary" (click)="save()">Salva</button>
     </div>
 </form>

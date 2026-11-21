@@ -16,6 +16,9 @@ export class ServiceInventory {
 getModel(id:string): Observable<Model>{
       return this.http.get<Model>(`${this.baseUrl}/modello?id=${id}`)
   }
+getModelbyName(nome_modello:string): Observable<string>{
+      return this.http.get<string>(`${this.baseUrl}/nomemodello?nome_modello=${nome_modello}`)
+  }
 getModelList(): Observable<Model[]>{
     return this.http.get<Model[]>(`${this.baseUrl}/modello`)
   }
