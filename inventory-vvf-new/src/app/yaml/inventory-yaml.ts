@@ -3,7 +3,7 @@ export interface Model {
   nome_modello?:string,
   id_categoria?:string,
   id_sottocategoria?:string,
-  campi?:Fields[],
+  caratteristiche?:string,
 }
 
 export interface Categoria {
@@ -18,22 +18,11 @@ export interface Sottocategoria {
 
 export interface Article {
   idModello:string,
-  caratteristiche: Fields,
+  caratteristiche: string,
   stato: 'DA_INVENTARIARE' | 'FUORI_USO' | 'MAGAZZINO',
   creation_date:  Date,
   categoria:string,
   sottocategoria:string
-}
-
-export interface Fields {
-  nome_campo?: string,
-  tipo_campo?:string,
-  value?:string | number | boolean,
-}
-export enum TipoCampo {
-  NUME = 'Numerico',
-  TESTO = 'Testo',
-  BOOL = 'Decisionale',
 }
 
 export enum Stato {

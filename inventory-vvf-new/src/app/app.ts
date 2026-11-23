@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { InvModel } from './inv-categ/inv-model/inv-model';
 import { InvCateg } from './inv-categ/inv-categ';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ import { InvCateg } from './inv-categ/inv-categ';
     MatCheckboxModule, MatButtonModule, MatCardModule, MatDialogModule,
     MatFormField, MatLabel, MatIcon, MatInputModule,  CommonModule,
     MatSidenavModule, MatIconModule, MatButtonModule, MatListModule, MatDialogModule],
+    providers: [provideNativeDateAdapter()],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

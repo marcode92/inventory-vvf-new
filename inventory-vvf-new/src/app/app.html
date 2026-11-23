@@ -6,9 +6,9 @@
   <div class="position">
       <button class="nav-button" routerLink="/home"> <mat-icon>inventory_2</mat-icon> HOME</button>
 
-  <button class="nav-button" (click)="openCategoryDialog()"> <mat-icon>inventory_2</mat-icon> Crea modello</button>
+  <button class="nav-button" (click)="openCategoryDialog(false)"> <mat-icon>inventory_2</mat-icon> Crea modello</button>
   <button class="nav-button" routerLink="/articolo"> <mat-icon>inventory_2</mat-icon> Agg. articolo</button>
-  <button class="nav-button" routerLink="/arrivi"> <mat-icon>inventory_2</mat-icon> Gest. arrivi</button>
+  <button class="nav-button" (click)="openCategoryDialog(true)"> <mat-icon>inventory_2</mat-icon> Gest. arrivi</button>
   <button class="nav-button" routerLink="/assegnazione"> <mat-icon>inventory_2</mat-icon> Gest. assegn.</button>
   </div>
 </mat-toolbar>

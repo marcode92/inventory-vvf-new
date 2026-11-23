@@ -14,8 +14,7 @@
         !assetModel.get('nome_modello')?.hasError('alreadyExists')">
                 Campo obbligatorio
             </mat-error>
-            <mat-error
-                *ngIf="assetModel.get('nome_modello')?.hasError('alreadyExists') && 
+            <mat-error *ngIf="assetModel.get('nome_modello')?.hasError('alreadyExists') && 
                 !assetModel.get('nome_modello')?.hasError('required')">
                 Nome già esistente
             </mat-error>
@@ -38,37 +37,15 @@
         </div>
     </div>
     <mat-divider></mat-divider>
-    <h3>CUSTOM FIELDS</h3>
-    <div formArrayName="tecn" class="fields-grid">
-        <div *ngFor="let field of tecnCtrl.controls; let i = index" [formGroupName]="i" class="field-row">
-            <mat-form-field appearance="outline">
-                <mat-label>Nome Campo</mat-label>
-                <input matInput type="text" formControlName="nome_campo" />
-                <mat-error *ngIf="field.get('nome_campo')?.hasError('required')">
-                    Campo obbligatorio
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Tipo Campo</mat-label>
-                <mat-select formControlName="tipo_campo">
-                    <mat-option *ngFor="let tipo of tipi" [value]="tipo">
-                        {{ tipo }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="field.get('tipo_campo')?.hasError('required')">
-                    Campo obbligatorio
-                </mat-error>
-            </mat-form-field>
-            <button mat-icon-button (click)="removeRow(i)">
-                <mat-icon> delete </mat-icon>
-            </button>
-            <ng-container *ngIf="i == 0">
-                <button mat-icon-button (click)="addRow()">
-                    <mat-icon> add </mat-icon>
-                </button>
-            </ng-container>
-        </div>
-    </div>
+    <h3>DESCRIZIONE MODELLO (MAX 1500 CARATTERI)</h3>
+    <mat-form-field class="description">
+        <textarea matInput rows="7"
+  maxlength="1500" type="text" formControlName="caratteristiche"></textarea>
+   <mat-hint align="end">
+    {{ assetModel.get('caratteristiche')?.value?.length || 0 }}/1500
+  </mat-hint>
+    </mat-form-field>
+    
     <div align="end" class="position-footer">
         <button mat-button mat-dialog-close>Annulla</button>
         <button mat-raised-button color="primary" (click)="save()">Salva</button>

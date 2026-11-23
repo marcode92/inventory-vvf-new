@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Categoria, Fields, Model, Sottocategoria, TipoCampo } from '../../yaml/inventory-yaml';
 import { ServiceInventory } from '../../service/service-inventory';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -11,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { Model } from '../../yaml/inventory-yaml';
 
 @Component({
   selector: 'app-inv-model',
@@ -24,14 +24,7 @@ export class InvModel {
   @Input() categoriaselez?:string;
 
   error: string | null = null;  
-  tipi: TipoCampo[] = Object.values(TipoCampo);
   obj_model: Model = {};
-
-  readonly TipoCampo = TipoCampo;
-  
-  get tecnCtrl(): FormArray<FormGroup> {
-    return this.assetModel.controls.tecn;
-  }
   
 assetModel = new FormGroup({
   nome_modello: new FormControl('',[Validators.required]),
@@ -39,7 +32,7 @@ assetModel = new FormGroup({
   id_categoria: new FormControl(''),
   sottocategoria: new FormControl(''),
   id_sottocategoria: new FormControl(''),
-  tecn:  new FormArray<FormGroup>([])
+  caratteristiche: new FormControl(''),
 })
 
   constructor(private serviceInventory: ServiceInventory, private snackBar: MatSnackBar
@@ -64,31 +57,6 @@ assetModel = new FormGroup({
     });
       })
     }
-    
-     this.tecnCtrl.push(this.createField());
-     this.tecnCtrl.push(this.createField());
-     this.tecnCtrl.push(this.createField());
-
-  }
-
-    createField(nomeCampo?: string, tipoCampo?: string | undefined, value?: string | boolean | number): FormGroup {
-    return new FormGroup({
-      nome_campo: new FormControl(nomeCampo, [Validators.required]),
-      tipo_campo: new FormControl(tipoCampo, [Validators.required]),
-    })
-  }
-
-    removeRow(index: number) {
-    if (this.tecnCtrl.length > 1)
-      this.tecnCtrl.removeAt(index);
-    else {
-      this.error = "Minimo numero righe 1"
-      this.snackBar.open(this.error)
-    }
-  }
-
-  addRow() {
-    this.tecnCtrl.push([this.createField()])
   }
 
   
@@ -103,27 +71,19 @@ assetModel = new FormGroup({
       } else {
         this.assetModel.markAllAsTouched();
         if(this.assetModel.valid){
-          const fieldsModelCtrl = this.assetModel.get('tecn') as FormArray;
-          let list_fields: Fields[] = [];
 
-          fieldsModelCtrl.controls.forEach((x, i) => {
-            list_fields[i] = {
-              nome_campo: x.get('nome_campo')?.value || '',
-              tipo_campo: x.get('tipo_campo')?.value || '',
-            }
-          })
           if(this.assetModel.get('id_sottocategoria')?.value)
           this.obj_model = {
             nome_modello: this.assetModel.get('nome_modello')?.value || '',
             id_categoria: this.assetModel.get('id_categoria')?.value || '',
             id_sottocategoria: this.assetModel.get('id_sottocategoria')?.value || '',
-            campi: list_fields
+            caratteristiche: this.assetModel.get('caratteristiche')?.value || '',
           }
           else {
            this.obj_model = {
             nome_modello: this.assetModel.get('nome_modello')?.value || '',
             id_categoria: this.assetModel.get('id_categoria')?.value || '',
-            campi: list_fields
+            caratteristiche: this.assetModel.get('caratteristiche')?.value || '',
           } 
           }
 
