@@ -14,6 +14,9 @@ import { ServiceInventory } from '../service/service-inventory';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { ArrivalModels } from '../yaml/inventory-yaml';
 
 @Component({
   selector: 'app-inv-arrivi',
@@ -21,14 +24,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSelectModule, MatSnackBarModule, MatDividerModule, 
     MatSlideToggle, MatIcon,MatDialogModule,ReactiveFormsModule,
      MatFormField, MatInputModule, MatIconModule, CommonModule,
-     MatDatepickerModule, MatSelectModule, MatButtonModule],
+     MatDatepickerModule, MatSelectModule, MatButtonModule, MatTableModule],
   templateUrl: './inv-arrivi.html',
   styleUrl: './inv-arrivi.scss',
 
 })
 export class InvArrivi {
-  listCatName = new Map<string, string>
-  listsottoCatName = new Map<string, string>
+  selection = new SelectionModel<number>(false, []);
+  dataSource = new MatTableDataSource<ArrivalModels>([])
+
+  displayedColumns = [
+    'select',
+    'nome_categoria',
+    'nome_sottocategoria',
+    'nome_modello'
+  ];
+
   arrivalCtrl = new FormGroup({
     modello: new FormControl({ value: '', disabled: true }),
     categoria: new FormControl(''),
@@ -41,27 +52,8 @@ export class InvArrivi {
   constructor(private serviceInventory: ServiceInventory){}
 
 ngOnInit(){
-   this.serviceInventory.getCategoryList().subscribe(x => {
-      x.forEach(cat => {
-        if (cat.id)
-          this.listCatName.set(cat.id, cat.nome_categoria)
-      })
-    })
-
-    this.arrivalCtrl.get('categoria')?.valueChanges.pipe(
-      tap(() => {
-        this.arrivalCtrl.controls.sottocategoria.disable();
-        this.arrivalCtrl.controls.sottocategoria.reset()
-        this.listsottoCatName.clear()
-      }),
-      switchMap(id =>
-        id ? this.serviceInventory.getSottoCategoryList(id) : of([]))).subscribe(x => {
-          if (x.length) {
-            this.arrivalCtrl.get('sottocategoria')?.enable();
-            x.forEach(cat => {
-              if (cat.id)
-                this.listsottoCatName.set(cat.id, cat.nome_sottocategoria)
-            })
-          }
-        })}
+  this.serviceInventory.getArrivalModels().subscribe(x => {
+    this.dataSource.data = x;
+  })
+}
 }

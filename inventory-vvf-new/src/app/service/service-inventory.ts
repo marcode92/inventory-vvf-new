@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Categoria, Model, Sottocategoria } from '../yaml/inventory-yaml';
+import { ArrivalModels, Categoria, Model, Sottocategoria } from '../yaml/inventory-yaml';
 
 @Injectable({
   providedIn: 'root',
@@ -48,5 +48,10 @@ createCategoryList(body: Categoria): Observable<Categoria>{
 
 createSottoCategoryList(body: Categoria): Observable<Sottocategoria>{
     return this.http.post<Sottocategoria>(`${this.baseUrl}/sottocategoria`,body)
+}
+
+/********************************ARRIVAL*********/
+getArrivalModels(): Observable<ArrivalModels[]>{
+      return this.http.get<ArrivalModels[]>(`${this.baseUrl}/arrivi/modello`)
 }
 }

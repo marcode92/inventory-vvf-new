@@ -17,12 +17,21 @@ export interface Sottocategoria {
 }
 
 export interface Article {
-  idModello:string,
+  id_modello:string,
   caratteristiche: string,
   stato: 'DA_INVENTARIARE' | 'FUORI_USO' | 'MAGAZZINO',
   creation_date:  Date,
   categoria:string,
   sottocategoria:string
+}
+
+export interface ArrivalModels {
+  id_modello?:string,
+  nome_modello?:string,
+  id_categoria?:string,
+  nome_categoria?: string,
+  id_sottocategoria?: string,
+  nome_sottocategoria?:string
 }
 
 export enum Stato {
