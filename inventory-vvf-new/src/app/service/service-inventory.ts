@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArrivalModels, Categoria, Model, Sottocategoria } from '../yaml/inventory-yaml';
+import { ArrivalSave, ArrivalTableInfo, Categoria, Model, Sottocategoria } from '../yaml/inventory-yaml';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +51,11 @@ createSottoCategoryList(body: Categoria): Observable<Sottocategoria>{
 }
 
 /********************************ARRIVAL*********/
-getArrivalModels(): Observable<ArrivalModels[]>{
-      return this.http.get<ArrivalModels[]>(`${this.baseUrl}/arrivi/modello`)
+getArrivalTableInfo(): Observable<ArrivalTableInfo[]>{
+      return this.http.get<ArrivalTableInfo[]>(`${this.baseUrl}/arrivi/modello`)
 }
+createArrival(arrival: ArrivalSave): Observable<ArrivalSave>{
+        return this.http.post<ArrivalSave>(`${this.baseUrl}/arrivi`,arrival)
+        }
+
 }

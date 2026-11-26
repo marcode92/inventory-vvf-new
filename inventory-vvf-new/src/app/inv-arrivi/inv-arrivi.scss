@@ -1,5 +1,5 @@
 
-.row-position {
+.title-container {
   display: flex;
   flex-direction: row;
   gap:16px;
@@ -8,18 +8,49 @@
   margin-top:12px
 }
 
+
+.row-position {
+    display: flex;
+    align-items: flex-start;
+    gap:24px;
+}
+
 .col-position {
     display: flex;
     flex-direction: column;
+     align-items: flex-start;    
 }
 
-.info-box {
+.info-container {
     display: flex;
-    align-items: center;
-    gap:16px;
-  padding: 16px;
-  border: 1px solid #d5dce8;
-  border-radius: 12px;
-  background: #f5f7fa;
-  margin-bottom:24px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    height: calc(45vh - 116px);
+    overflow-y: auto;
+    border-radius: 12px;
+    background: #f5f7fa;
+    margin:12px; 
+    border: 1px solid #d5dce8;
+  }
+  
+  .table-container{
+    display: flex;
+    flex-direction: column;
+    height: calc(50vh - 116px);
+    overflow-y: auto;
+    border-radius: 12px;
+    background: #f5f7fa;
+    margin:12px; 
+    border: 1px solid #d5dce8;
+}
+
+mat-form-field {
+  width: 250px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: flex-end;
+    margin:12px; 
 }

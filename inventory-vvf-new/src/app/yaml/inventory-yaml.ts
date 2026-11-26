@@ -25,13 +25,20 @@ export interface Article {
   sottocategoria:string
 }
 
-export interface ArrivalModels {
+export interface ArrivalTableInfo {
   id_modello?:string,
   nome_modello?:string,
   id_categoria?:string,
   nome_categoria?: string,
   id_sottocategoria?: string,
   nome_sottocategoria?:string
+}
+
+export interface ArrivalSave {
+  id_modello?:string,
+  quantita?: string,
+  mittente?: string,
+  data_creation?: string,
 }
 
 export enum Stato {
